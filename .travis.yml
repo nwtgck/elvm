@@ -3,6 +3,11 @@ language: cpp
 compiler:
   - clang
 
+addons:
+  apt:
+    packages:
+      - scala
+
 script:
   - make -j4 rb elc-rb
   - tools/check_selfhost.sh x86

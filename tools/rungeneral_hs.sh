@@ -2,4 +2,5 @@
 
 set -e
 
-runghc $1 -o a.out
+cp $1 $1.hs
+stack runghc $1.hs

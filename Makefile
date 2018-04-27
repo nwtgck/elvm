@@ -99,6 +99,7 @@ ELC_SRCS := \
 	el.c \
 	forth.c \
 	fs.c \
+	general_hs.c \
 	go.c \
 	hs.c \
 	i.c \
@@ -458,6 +459,12 @@ RUNNER := tools/runhs.sh
 TOOL := ghc
 include target.mk
 $(OUT.eir.hs.out): tools/runhs.sh
+
+TARGET := general_hs
+RUNNER := tools/rungeneral_hs.sh
+TOOL := ghc
+include target.mk
+$(OUT.eir.general_hs.out): tools/rungeneral_hs.sh
 
 test: $(TEST_RESULTS)
 

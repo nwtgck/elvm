@@ -84,7 +84,8 @@ static void general_hs_emit_func_epilogue(void) {
   dec_indent();
   dec_indent();
   emit_line("modifyIORef pcRef (+1)");
-  emit_line("whileLoop");
+  emit_line("exits <- readIORef exitsRef");
+  emit_line("if exits then return () else whileLoop");
   dec_indent();
   emit_line("else return ()");
   dec_indent();
@@ -150,7 +151,7 @@ static void general_hs_emit_inst(Inst* inst) {
     break;
 
   case EXIT:
-    emit_line("exitSuccess");
+    emit_line("writeIORef exitsRef True");
     break;
 
   case DUMP:
@@ -220,6 +221,7 @@ void target_general_hs(Module* module) {
   emit_line("main :: IO ()");
   emit_line("main = do");  
   inc_indent();
+  emit_line("exitsRef <- newIORef False ::IO (IORef Bool)");
   for (int i = 0; i < 7; i++) {
     emit_line("%sRef <- newIORef 0 :: IO (IORef Int)", reg_names[i]);
   }
@@ -252,7 +254,8 @@ void target_general_hs(Module* module) {
     emit_line("%d -> func%d", i, i);
   }
   dec_indent();
-  emit_line("mainLoop");
+  emit_line("exits <- readIORef exitsRef");
+  emit_line("if exits then return () else mainLoop");
   general_hs_n_dec_indent(5);
   emit_line("mainLoop");
 

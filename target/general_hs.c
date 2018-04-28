@@ -210,14 +210,12 @@ void target_general_hs(Module* module) {
   emit_line("{-# LANGUAGE ScopedTypeVariables #-}");
   emit_line("{-# LANGUAGE FlexibleInstances #-}");
   emit_line("{-# LANGUAGE TypeApplications #-}");
-  emit_line("{-# LANGUAGE TypeFamilies #-}");
   emit_line("{-# LANGUAGE NamedFieldPuns #-}");
   emit_line("{-# LANGUAGE Strict #-}");
   emit_line("");
   emit_line("import Data.IORef");
   emit_line("import Data.Char");
   emit_line("import Data.Bits");
-  emit_line("import System.Exit");
   emit_line("import Control.Monad.Catch");
   emit_line("");
   emit_line("import qualified Data.Array.MArray as MArray");
@@ -225,7 +223,6 @@ void target_general_hs(Module* module) {
   emit_line("import qualified Data.Array.IO as Array.IO");
   emit_line("import qualified Data.Array.ST as Array.ST");
   emit_line("import Data.Ix");
-  emit_line("import Data.Char");
   emit_line("import Data.IORef");
   emit_line("import Data.STRef");
   emit_line("import Control.Monad.Trans");

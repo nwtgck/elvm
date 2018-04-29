@@ -245,12 +245,7 @@ void target_general_hs(Module* module) {
   emit_line("defaultInOut = InOut{input=[], output=[]}");
   emit_line("");
   emit_line("instance GetPutInt IO where");
-  emit_line("  getInt =");
-  emit_line("    catch (do");
-  emit_line("        a <- fmap ord getChar");
-  emit_line("        return a");
-  emit_line("     )");
-  emit_line("     (\\(SomeException e) -> return 0)");
+  emit_line("  getInt = catch (fmap ord getChar) (\\(SomeException e) -> return 0)");
   emit_line("  putInt = putChar . chr");
   emit_line("");
   emit_line("instance GetPutInt m => GetPutInt (IdentityT m) where");
